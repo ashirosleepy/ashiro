@@ -2,39 +2,23 @@
 <html>
     <head>
         <title>
-            ashiro
+            Giới Thiệu - ashiro
         </title>
         <meta charset="utf-8">
     </head>
     <body>
         <h1>
-            Shiro's Homepage
+            Giới Thiệu Về Shiro
         </h1>
-        <nav>
-            <ul>
-                <li>
-                    <a href="pages/about.html">Giới Thiệu</a>
-                </li>
-                <li>
-                    <a href="pages/twcn.html">Trang web cá nhân</a>
-                </li>
-                <li>
-                    <a href="pages/tkb.html">Thời Khóa Biểu</a>
-                </li>
-                <li>
-                    <a href="pages/nv.html">Nguyện Vọng</a>
-                </li>
-                <li>
-                    <a href="pages/kyyeua1k34cpl.html">Kỷ Yếu A1 K34-CPL</a>
-                </li>
-                <li>
-                    <a href="pages/music/favmusic.html">Nhạc Yêu Thích</a>
-                </li>
-            </ul>
-        </nav>
+        <p>
+            Chào mừng bạn đến với trang web của tôi! Đây là nơi tôi chia sẻ về bản thân, sở thích và các dự án.
+        </p>
+        <p>
+            <a href="../index.html">Quay lại trang chủ</a>
+        </p>
         <p id="last-updated">Đang tải...</p>
         <script>
-            fetch('https://api.github.com/repos/ashirosleepy/ashiro/commits?path=index.html&per_page=1')
+            fetch('https://api.github.com/repos/ashirosleepy/ashiro/commits?path=pages/about.html&per_page=1')
                 .then(response => response.json())
                 .then(data => {
                     if (data.length > 0) {
