@@ -27,5 +27,22 @@
                 <a href="pages/music/favmusic.html">Nhạc Yêu Thích</a>
             </li>
         </h1>
+        <p id="last-updated">Đang tải...</p>
+        <script>
+            fetch('https://api.github.com/repos/ashirosleepy/ashiro/commits?path=index.html&per_page=1')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const date = new Date(data[0].commit.committer.date);
+                        document.getElementById('last-updated').innerText = 'Chỉnh sửa lần cuối: ' + date.toLocaleString('vi-VN');
+                    } else {
+                        document.getElementById('last-updated').innerText = 'Không tìm thấy thông tin chỉnh sửa.';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('last-updated').innerText = 'Lỗi khi tải thông tin chỉnh sửa.';
+                    console.error(error);
+                });
+        </script>
     </body>
 </html>
