@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(link);
     }
 
-    // Optional: Add last updated script if not present
+// Optional: Add last updated script if not present
     if (!document.getElementById('last-updated-script')) {
         const script = document.createElement('script');
         script.id = 'last-updated-script';
