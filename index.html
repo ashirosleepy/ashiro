@@ -73,13 +73,13 @@
                 .then(data => {
                     if (data.length > 0) {
                         const date = new Date(data[0].commit.committer.date);
-                        document.getElementById('last-updated').innerText = 'Chỉnh sửa lần cuối: ' + date.toLocaleString('vi-VN');
+                        document.getElementById('last-updated').innerText = 'Chỉnh Sửa Lần Cuối: ' + date.toLocaleString('vi-VN');
                     } else {
-                        document.getElementById('last-updated').innerText = 'Không tìm thấy thông tin chỉnh sửa.';
+                        document.getElementById('last-updated').innerText = 'Không Tìm Thấy Thông Tin Chỉnh Sửa.';
                     }
                 })
                 .catch(error => {
-                    document.getElementById('last-updated').innerText = 'Lỗi khi tải thông tin chỉnh sửa.';
+                    document.getElementById('last-updated').innerText = 'Lỗi Khi Tải Thông Tin Chỉnh Sửa.';
                     console.error(error);
                 });
         </script>
