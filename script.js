@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!document.querySelector('link[rel="icon"]')) {
         const link = document.createElement('link');
         link.rel = 'icon';
-        link.href = 'favicon.jpg';  // Path from root
-        link.type = 'image/jpeg';
+        link.href = '/ashiro/favicon.png';  // Path from root
+        link.type = 'image/png';
         document.head.appendChild(link);
     }
 
