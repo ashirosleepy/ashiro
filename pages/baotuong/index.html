@@ -95,8 +95,24 @@
             </div>
             <div class="footer-col">
                 <h3>Thông tin khác</h3>
-                <p>Cập nhật lần cuối: <span id="currentDate"></span></p>
-                <p>Nguồn tham khảo: Báo Mực Tím, Thư viện trường.</p>
+                <p id="last-updated">Đang tải...</p>
+        <script>
+            fetch('https://api.github.com/repos/ashirosleepy/ashiro/commits?path=index.html&per_page=1')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const date = new Date(data[0].commit.committer.date);
+                        document.getElementById('last-updated').innerText = 'Cập Nhật Lần Cuối: ' + date.toLocaleString('vi-VN');
+                    } else {
+                        document.getElementById('last-updated').innerText = 'Không Tìm Thấy Thông Tin Chỉnh Sửa.';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('last-updated').innerText = 'Lỗi Khi Tải Thông Tin Chỉnh Sửa.';
+                    console.error(error);
+                });
+        </script>
+                <p>Nguồn tham khảo: </p>
             </div>
         </div>
         <div class="copyright">
