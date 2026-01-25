@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Tường | Nhóm Sáng Tạo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header id="header">
+        <div class="overlay">
+            <h1 class="main-title">Thanh Xuân Rực Rỡ</h1>
+            <p class="slogan">Kỷ niệm mái trường - Tri ân thầy cô</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#intro">Giới thiệu</a></li>
+            <li><a href="#gallery">Góc ảnh</a></li>
+            <li><a href="#media">Âm nhạc & Clip</a></li>
+            <li><a href="#comments">Bình luận</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <section id="intro" class="section-box">
+            <h2 class="section-title">✨ Lời Giới Thiệu</h2>
+            <div class="content-body">
+                <p>Chào mừng các bạn đến với trang báo tường điện tử của nhóm chúng mình. Đây là nơi lưu giữ những khoảnh khắc đẹp nhất của tuổi học trò, những lời tri ân sâu sắc gửi đến thầy cô giáo và những sáng tạo nghệ thuật của các thành viên...</p>
+            </div>
+        </section>
+
+        <section id="gallery" class="section-box">
+            <h2 class="section-title">📸 Góc Ảnh Kỷ Yếu</h2>
+            <div class="gallery-grid">
+                <img src="../baotuong/dsc09316.JPG" alt="">
+                <img src="../baotuong/dsc09511.JPG" alt="">
+                <img src="../baotuong/DSC04282.JPG" alt="">
+            </div>
+        </section>
+
+        <section id="media" class="section-box">
+            <h2 class="section-title">🎵 Góc Âm Nhạc & Video</h2>
+            <div class="media-container">
+                <div class="video-wrapper">
+                    <p>Video Clip: Chúng ta của tương lai</p>
+                    <iframe width="100%" height="360" src="https://drive.google.com/file/d/1awdqhRFzyS8L3JZnMSK7SxVYLsFHX8-7/preview" title="Driver" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="music-player">
+                    <p>Bài hát: Mong Ước Kỷ Niệm Xưa</p>
+                    <audio controls>
+                        <source src="song.mp3" type="audio/mpeg">
+                        Trình duyệt của bạn không hỗ trợ phát nhạc.
+                    </audio>
+                </div>
+            </div>
+        </section>
+
+        <section id="comments" class="section-box">
+            <h2 class="section-title">💬 Góc Bình Luận</h2>
+            <p>Hãy để lại cảm nghĩ của bạn về tờ báo tường này nhé!</p>
+            
+            <form id="commentForm">
+                <div class="form-group">
+                    <label for="name">Họ và tên:</label>
+                    <input type="text" id="name" required placeholder="Nhập tên của bạn...">
+                </div>
+                <div class="form-group">
+                    <label for="message">Lời nhắn:</label>
+                    <textarea id="message" rows="4" required placeholder="Viết bình luận..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Gửi bình luận</button>
+            </form>
+
+            <div id="commentList" class="comment-list">
+                </div>
+        </section>
+
+    </div>
+
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Thông tin nhóm</h3>
+                <p>Nhóm thực hiện: Thiên Tào</p>
+                <p>Trường THPT C Phủ Lý</p>
+            </div>
+            <div class="footer-col">
+                <h3>Liên hệ</h3>
+                <p>Email người đại diện: abeshiroanime@gmail.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>Thông tin khác</h3>
+                <p>Cập nhật lần cuối: <span id="currentDate"></span></p>
+                <p>Nguồn tham khảo: Báo Mực Tím, Thư viện trường.</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Bản quyền thuộc về <a href="https://ashirosleepy.github.io/ashiro/pages/profile/index.html" style="color: #aaa;" target="_blank">Shiro</a>.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
