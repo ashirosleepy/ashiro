@@ -110,6 +110,7 @@ nav ul li a:hover {
     border-radius: 10px; /* Bo góc */
     box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Đổ bóng nhẹ */
     scroll-margin-top: 80px; /* Để khi cuộn tới đây không bị che bởi header cố định */
+    border: 1px solid #ddd; /* Viền mảnh, đẹp */
 }
 
 .section-title {
