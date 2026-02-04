@@ -63,13 +63,21 @@ nav ul {
     list-style: none; /* Bỏ dấu chấm đầu dòng */
     display: flex; /* Sử dụng flexbox cho menu */
     justify-content: center; /* Căn giữa menu */
+    gap: 0px; /* Khoảng cách giữa các mục */
     margin: 0; /* Bỏ margin mặc định */
     padding: 15px; /* Padding cho menu */
     flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
 }
 
 nav ul li {
-    margin: 0 15px; /* Khoảng cách giữa các mục */
+    gap: 20px; /* Khoảng cách giữa các mục */
+    padding: 0 15px; /* Padding hai bên mục */
+    border-right: 1px solid #ccc; /* dấu | */
+    position: relative; /* Để chứa phần tử con */
+}
+
+nav ul li:last-child {
+    border-right: none;
 }
 
 nav ul li a {
@@ -241,22 +249,9 @@ footer {
     color: #aaa; /* Màu chữ nhẹ hơn */
 }
 
-/* 1. Hiệu ứng Header chuyển động màu (Gradient Flow) */
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
 header {
     background-size: 200% 200%; /* Kích thước nền lớn để di chuyển */
     animation: gradientBG 6s ease infinite; /* Chạy vô tận trong 6 giây */
-}
-
-/* Hiệu ứng chữ rơi xuống (cho Tiêu đề) */
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); } 
 }
 
 .main-title {
