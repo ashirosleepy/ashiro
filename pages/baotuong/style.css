@@ -3,237 +3,238 @@
     --primary-color: #4a90e2; /* Màu chủ đạo (Xanh) cho Header */
     --secondary-color: #f9f9f9; /* Màu nền nội dung */
     --accent-color: #ffffff;   /* Màu nhấn */
-    --text-color: #333;
-    --footer-bg: #000000;
-    --card-bg: #ffffff;
+    --text-color: #333;       /* Màu chữ chính */
+    --footer-bg: #000000;     /* Màu nền footer */
+    --card-bg: #ffffff;      /* Màu nền thẻ bài viết */
 }
 
 body {
     font-family: var(--font-body, 'Roboto', sans-serif); /* ưu tiên biến, fallback Roboto */
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
+    margin: 0; /* Bỏ margin mặc định */
+    padding: 0; /* Bỏ padding mặc định */
+    line-height: 1.6; /* Chiều cao dòng dễ đọc */
 
     /* Nền */
     background-color: #f0f2f5; /* hoặc var(--bg-color) nếu muốn dùng biến */
-    background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
+    background-image: radial-gradient(#d1d1d1 1px, transparent 1px); /* hiệu ứng chấm bi mờ */
     background-size: 20px 20px; /* hiệu ứng chấm bi mờ */
 
     /* Màu chữ */
-    color: var(--text-color, var(--text-main));
+    color: var(--text-color, var(--text-main)); /* ưu tiên biến, fallback màu chữ chính */
 }
 
 
 /* --- PHẦN 1: HEADER --- */
 header {
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    color: white;
-    padding: 60px 20px;
-    text-align: center;
-    position: relative;
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); /* Gradient nền động */
+    color: white; /* Màu chữ trắng cho header */
+    padding: 60px 20px; /* Padding lớn cho header */
+    text-align: center; /* Căn giữa nội dung */
+    position: relative; /* Để chứa các phần tử con */
 }
 
 .main-title {
-    font-family: 'Pacifico', cursive;
-    font-size: 3.5rem;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-family: 'Pacifico', cursive; /* Font chữ nghệ thuật cho tiêu đề */
+    font-size: 3.5rem; /* Kích thước chữ lớn */
+    margin: 0; /* Bỏ margin mặc định */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Hiệu ứng bóng mờ cho chữ */
 }
 
 .slogan {
-    font-size: 1.2rem;
-    margin-top: 10px;
-    font-weight: 300;
+    font-size: 1.2rem; /* Kích thước chữ nhỏ hơn tiêu đề */
+    margin-top: 10px; /* Khoảng cách với tiêu đề */
+    font-weight: 300; /* Nhẹ nhàng hơn */
 }
 
 /* Menu điều hướng */
 nav {
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background-color: #fff; /* Màu nền trắng cho menu */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Đổ bóng nhẹ */
+    position: sticky; /* Giữ menu cố định khi cuộn */
+    top: 0; /* Dính vào đầu trang khi cuộn */
+    z-index: 100; /* Đảm bảo menu luôn ở trên cùng */
 }
 
 nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 15px;
-    flex-wrap: wrap;
+    list-style: none; /* Bỏ dấu chấm đầu dòng */
+    display: flex; /* Sử dụng flexbox cho menu */
+    justify-content: center; /* Căn giữa menu */
+    margin: 0; /* Bỏ margin mặc định */
+    padding: 15px; /* Padding cho menu */
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 15px; /* Khoảng cách giữa các mục */
 }
 
 nav ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: color 0.3s;
+    text-decoration: none; /* Bỏ gạch chân */
+    color: var(--text-color); /* Màu chữ */
+    font-weight: bold; /* In đậm */
+    font-size: 1.1rem; /* Kích thước chữ */
+    transition: color 0.3s; /* Hiệu ứng chuyển màu */
 }
 
 nav ul li a:hover {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Màu khi hover */
 }
 
 /* --- PHẦN 2: CONTENT --- */
 .container {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 20px;
+    max-width: 1000px; /* Giới hạn chiều rộng nội dung */
+    margin: 30px auto; /* Căn giữa với margin tự động */
+    padding: 0 20px; /* Padding hai bên */
 }
 
 .section-box {
-    background: var(--card-bg);
-    padding: 30px;
-    margin-bottom: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    background: var(--card-bg); /* Nền thẻ bài viết */
+    padding: 30px; /* Padding bên trong */
+    margin-bottom: 30px; /* Khoảng cách giữa các thẻ */
+    border-radius: 10px; /* Bo góc */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Đổ bóng nhẹ */
+    scroll-margin-top: 80px; /* Để khi cuộn tới đây không bị che bởi header cố định */
 }
 
 .section-title {
-    color: var(--primary-color);
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
-    margin-top: 0;
+    color: var(--primary-color); /* Màu tiêu đề */
+    border-bottom: 2px solid #eee; /* Đường dưới tiêu đề */
+    padding-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+    margin-top: 0; /* Bỏ margin trên */
 }
 
 /* Bài viết (Grid 3 cột) */
 .article-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    display: grid; /* Sử dụng grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Tự động điều chỉnh số cột */
+    gap: 20px; /* Khoảng cách giữa các bài viết */
 }
 
 .card {
-    background: #fdfdfd;
-    border: 1px solid #eee;
-    padding: 20px;
-    border-radius: 8px;
-    transition: transform 0.2s;
+    background: #fdfdfd; /* Nền thẻ bài viết */
+    border: 1px solid #eee; /* Viền nhẹ */
+    padding: 20px; /* Padding bên trong */
+    border-radius: 8px; /* Bo góc */
+    transition: transform 0.2s; /* Hiệu ứng chuyển động */
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px); /* Bay lên khi hover */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Đổ bóng khi hover */
 }
 
 .card h3 {
-    margin-top: 0;
-    color: var(--accent-color);
+    margin-top: 0; /* Bỏ margin trên */
+    color: var(--accent-color); /* Màu tiêu đề bài viết */
 }
 
 .read-more {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    cursor: pointer;
+    background: var(--primary-color); /* Nền nút */
+    color: white; /* Màu chữ nút */
+    border: none; /* Bỏ viền */
+    padding: 8px 15px; /* Padding nút */
+    border-radius: 4px; /* Bo góc nút */
+    cursor: pointer; /* Con trỏ khi hover */
 }
 
 /* Góc ảnh */
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+    display: grid; /* Sử dụng grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Tự động điều chỉnh số cột */
+    gap: 15px; /* Khoảng cách giữa các ảnh */
 }
 
 .gallery-grid img {
-    width: 100%;
-    border-radius: 5px;
-    object-fit: cover;
+    width: 100%; /* Ảnh chiếm toàn bộ khung */
+    border-radius: 5px; /* Bo góc ảnh */
+    object-fit: cover; /* Ảnh không bị méo */
 }
 
 /* Góc Âm nhạc */
 .media-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: flex; /* Sử dụng flexbox */
+    flex-direction: column; /* Xếp dọc */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
 }
 
 /* Góc Bình luận (Form) */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Khoảng cách giữa các nhóm form */
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    display: block; /* Hiển thị dạng block */
+    margin-bottom: 5px; /* Khoảng cách dưới label */
+    font-weight: bold; /* In đậm chữ label */
 }
 
 .form-group input, .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    width: 100%; /* Chiếm toàn bộ khung */
+    padding: 10px; /* Padding bên trong */
+    border: 1px solid #ddd; /* Viền nhẹ */
+    border-radius: 4px; /* Bo góc */
     box-sizing: border-box; /* Quan trọng để không bị vỡ layout */
 }
 
 .submit-btn {
-    background-color: var(--accent-color);
-    color: white;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
+    background-color: var(--accent-color); /* Nền nút gửi */
+    color: white; /* Màu chữ nút */
+    padding: 10px 25px; /* Padding nút */
+    border: none; /* Bỏ viền */
+    border-radius: 4px; /* Bo góc nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    font-size: 1rem; /* Kích thước chữ */
 }
 
 .comment-list {
-    margin-top: 20px;
-    border-top: 1px dashed #ccc;
-    padding-top: 20px;
-}
+    margin-top: 20px; /* Khoảng cách trên danh sách bình luận */
+    border-top: 1px dashed #ccc; /* Đường phân cách */
+    padding-top: 20px; /* Padding trên */
+} 
 
 .comment-item {
-    background: #f1f1f1;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    background: #f1f1f1; /* Nền bình luận */
+    padding: 10px; /* Padding bên trong */
+    margin-bottom: 10px; /* Khoảng cách giữa các bình luận */
+    border-radius: 5px; /* Bo góc */
 }
 
 /* --- PHẦN 3: FOOTER --- */
 footer {
     background-color: var(--footer-bg);
-    color: white;
-    padding: 40px 0 20px;
+    color: white; /* Màu chữ trắng */
+    padding: 40px 0 20px; /* Padding trên lớn hơn dưới */
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 20px;
+    display: flex; /* Sử dụng flexbox */
+    justify-content: space-around; /* Căn đều các cột */
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
+    max-width: 1000px; /* Giới hạn chiều rộng nội dung */
+    margin: 0 auto; /* Căn giữa */
+    padding: 0 20px; /* Padding hai bên */
 }
 
 .footer-col {
-    flex: 1;
-    min-width: 250px;
-    margin-bottom: 20px;
+    flex: 1; /* Cột chiếm đều không gian */
+    min-width: 250px; /* Đảm bảo cột không quá nhỏ */
+    margin-bottom: 20px; /* Khoảng cách dưới mỗi cột */
 }
 
 .footer-col h3 {
-    color: var(--accent-color);
-    border-bottom: 1px solid #555;
-    padding-bottom: 10px;
-    display: inline-block;
+    color: var(--accent-color); /* Màu tiêu đề footer */
+    border-bottom: 1px solid #555; /* Đường dưới tiêu đề */
+    padding-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+    display: inline-block; /* Chỉ viền dưới tiêu đề */
 }
 
 .copyright {
-    text-align: center;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #444;
-    font-size: 0.9rem;
-    color: #aaa;
+    text-align: center; /* Căn giữa chữ */
+    margin-top: 20px; /* Khoảng cách trên */
+    padding-top: 20px; /* Khoảng cách trên */
+    border-top: 1px solid #444; /* Đường phân cách */
+    font-size: 0.9rem; /* Chữ nhỏ hơn */
+    color: #aaa; /* Màu chữ nhẹ hơn */
 }
 
 /* 1. Hiệu ứng Header chuyển động màu (Gradient Flow) */
@@ -251,11 +252,11 @@ header {
 /* Hiệu ứng chữ rơi xuống (cho Tiêu đề) */
 @keyframes slideDown {
     from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
+    to { opacity: 1; transform: translateY(0); } 
 }
 
 .main-title {
-    animation: slideDown 1s ease-out forwards;
+    animation: slideDown 1s ease-out forwards; /* Hiệu ứng rơi xuống */
 }
 
 .slogan {
@@ -266,38 +267,38 @@ header {
 /* 2. Hiệu ứng các thẻ bài viết (Card Hover) xịn hơn */
 .card {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    position: relative;
-    top: 0;
+    position: relative; /* Để có thể di chuyển */
+    top: 0; /* Vị trí ban đầu */
 }
 
 .card:hover {
     transform: translateY(-10px); /* Bay lên cao hơn */
     box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2); /* Đổ bóng màu xanh */
-    border-color: var(--primary-color);
+    border-color: var(--primary-color); /* Viền đổi màu */
 }
 
 .read-more:hover {
     background-color: #333;
     transform: scale(1.05); /* Phóng to nút nhẹ */
-    transition: 0.2s;
+    transition: 0.2s; /* Hiệu ứng mượt */
 }
 
 /* 3. Hiệu ứng Ảnh trong thư viện (Zoom In) */
 .gallery-grid img {
-    transition: transform 0.5s ease;
-    cursor: pointer;
+    transition: transform 0.5s ease; /* Hiệu ứng mượt */
+    cursor: pointer; /* Con trỏ khi hover */
 }
 
 .gallery-grid img:hover {
     transform: scale(1.05); /* Phóng to ảnh khi di chuột */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Đổ bóng ảnh */
 }
 
 /* 4. Class chuẩn bị cho Javascript (Hiệu ứng cuộn tới đâu hiện tới đó) */
 .reveal {
     opacity: 0;
     transform: translateY(50px); /* Dịch xuống dưới */
-    transition: all 0.8s ease-out;
+    transition: all 0.8s ease-out; /* Hiệu ứng mượt */
 }
 
 .reveal.active {
