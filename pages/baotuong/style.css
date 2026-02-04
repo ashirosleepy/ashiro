@@ -35,12 +35,14 @@ header {
     padding: 60px 20px; /* Padding lớn cho header */
     text-align: center; /* Căn giữa nội dung */
     position: relative; /* Để chứa các phần tử con */
+    overflow: hidden; /* Ẩn phần thừa khi có hiệu ứng */
 }
 
 .main-title {
     font-family: 'Pacifico', cursive; /* Font chữ nghệ thuật cho tiêu đề */
-    font-size: 3.5rem; /* Kích thước chữ lớn */
-    margin: 0; /* Bỏ margin mặc định */
+    font-size: 4rem; /* Kích thước chữ lớn */
+    margin: 0 ; /* Bỏ margin mặc định */
+    text-align: center; /* Căn giữa chữ */
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Hiệu ứng bóng mờ cho chữ */
 }
 
@@ -48,6 +50,8 @@ header {
     font-size: 1.2rem; /* Kích thước chữ nhỏ hơn tiêu đề */
     margin-top: 10px; /* Khoảng cách với tiêu đề */
     font-weight: 300; /* Nhẹ nhàng hơn */
+    text-align: center; /* Căn giữa chữ */
+    margin: 0; /* Bỏ margin mặc định */
 }
 
 /* Menu điều hướng */
@@ -303,4 +307,15 @@ header {
 .reveal.active {
     opacity: 1;
     transform: translateY(0); /* Trở về vị trí cũ */
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
