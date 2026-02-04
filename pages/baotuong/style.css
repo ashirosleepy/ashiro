@@ -8,6 +8,10 @@
     --card-bg: #ffffff;      /* Màu nền thẻ bài viết */
 }
 
+html {
+    scroll-behavior: smooth; /* Hiệu ứng cuộn mượt toàn trang */
+}
+
 body {
     font-family: var(--font-body, 'Roboto', sans-serif); /* ưu tiên biến, fallback Roboto */
     margin: 0; /* Bỏ margin mặc định */
