@@ -18,7 +18,7 @@
 
     <nav>
         <ul>
-            <li><a href="#top"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+            <li><a href="#"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
             <li><a href="#intro">Giới thiệu</a></li>
             <li><a href="#gallery">Góc ảnh</a></li>
             <li><a href="#media">Âm nhạc & Clip</a></li>
@@ -103,7 +103,7 @@
                 .then(data => {
                     if (data.length > 0) {
                         const date = new Date(data[0].commit.committer.date);
-                        document.getElementById('last-updated').innerText = 'Cập Nhật Lần Cuối: ' + date.toLocaleString('vi-VN');
+                        document.getElementById('last-updated').innerText = '' + date.toLocaleString('vi-VN');
                     } else {
                         document.getElementById('last-updated').innerText = 'Không Tìm Thấy Thông Tin Chỉnh Sửa.';
                     }
