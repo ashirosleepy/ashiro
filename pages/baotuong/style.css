@@ -146,6 +146,41 @@ a { text-decoration: none; }
   pointer-events: none; /* Không tương tác */
 }
 
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+  }
+
+  .navbar .container {
+    justify-content: flex-start;
+    padding: 0 8px;
+  }
+
+  .anchors {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .anchors::-webkit-scrollbar { display: none; }
+
+  .anchor {
+    height: 48px;
+    padding: 0 12px;
+    font-size: 14px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .indicator {
+    display: none;
+  }
+
+  .dropdown-menu {
+    min-width: 180px;
+  }
+}
+
 /* Dropdown */
 .dropdown {
   position: relative; /* Để chứa menu con */
