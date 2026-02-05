@@ -232,6 +232,22 @@ a { text-decoration: none; }
   }
 }
 
+@media (max-width: 430px) {
+  .anchors {
+    gap: 2px 4px;
+  }
+
+  .anchor {
+    height: 40px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  #gameToggle {
+    max-width: 92px;
+  }
+}
+
 /* Dropdown */
 .dropdown {
   position: relative; /* Để chứa menu con */
