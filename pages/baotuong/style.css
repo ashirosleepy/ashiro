@@ -194,6 +194,7 @@ a { text-decoration: none; }
 @media (max-width: 768px) {
   .navbar {
     height: auto;
+    padding: 4px 0;
   }
 
   .navbar .container {
@@ -202,16 +203,19 @@ a { text-decoration: none; }
   }
 
   .anchors {
+    width: 100%;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 4px 6px;
     overflow: visible;
   }
 
   .anchor {
-    height: 44px;
+    height: auto;
     padding: 0 10px;
     font-size: 13px;
+    line-height: 1.2;
     flex: 0 0 auto;
     white-space: nowrap;
     max-width: 100%;
@@ -238,8 +242,8 @@ a { text-decoration: none; }
   }
 
   .anchor {
-    height: 40px;
-    padding: 0 8px;
+    height: auto;
+    padding: 6px 8px;
     font-size: 12px;
   }
 
