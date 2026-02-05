@@ -55,46 +55,112 @@ header {
 }
 
 /* Menu điều hướng */
-nav {
-    background-color: #fff; /* Màu nền trắng cho menu */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Đổ bóng nhẹ */
-    position: sticky; /* Giữ menu cố định khi cuộn */
-    top: 0; /* Dính vào đầu trang khi cuộn */
-    z-index: 100; /* Đảm bảo menu luôn ở trên cùng */
+
+* { box-sizing: border-box; } /* Giúp tính toán kích thước dễ dàng hơn */
+
+/* Bỏ gạch chân mặc định */
+a { text-decoration: none; } 
+
+/* Navbar chính */
+.navbar {
+  position: sticky; /* Cố định khi cuộn */
+  top: 0; /* Ở trên cùng */
+  left: 0; /* Bắt đầu từ bên trái */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  height: 58px; /* Chiều cao navbar */
+  background: rgba(0,0,0,.7); /* Nền mờ */
+  border-bottom: 1px solid rgba(255,255,255,.08); /* Viền dưới nhẹ */
+  backdrop-filter: saturate(180%) blur(12px); /* Hiệu ứng làm mờ nền */
+  display: flex; /* Sử dụng flexbox */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  z-index: 1000; /* Đảm bảo nằm trên các phần tử khác */
+}
+.navbar .container {
+  max-width: 1200px; /* Giới hạn chiều rộng nội dung */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  display: flex; /* Sử dụng flexbox */
+  justify-content: center; /* Căn giữa nội dung */
 }
 
-nav ul {
-    list-style: none; /* Bỏ dấu chấm đầu dòng */
-    display: flex; /* Sử dụng flexbox cho menu */
-    justify-content: center; /* Căn giữa menu */
-    gap: 0px; /* Khoảng cách giữa các mục */
-    margin: 0; /* Bỏ margin mặc định */
-    padding: 15px; /* Padding cho menu */
-    flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
+/* Anchors */
+.anchors {
+  display: flex;  /* Sử dụng flexbox */
+  position: relative; /* Để chứa chỉ báo */
+  --ind-x: 0;  /* Biến CSS cho vị trí và kích thước chỉ báo */
+  --ind-width: 0; /* Biến CSS cho vị trí và kích thước chỉ báo */
 }
 
-nav ul li {
-    gap: 20px; /* Khoảng cách giữa các mục */
-    padding: 0 15px; /* Padding hai bên mục */
-    border-right: 1px solid #ccc; /* dấu | */
-    position: relative; /* Để chứa phần tử con */
+.anchor {
+  display: flex; align-items: center; /* Căn giữa theo chiều dọc */
+  height: 58px; padding: 0 16px; /* Chiều cao và padding */
+  font-size: 18px; color: #fff; opacity: .9; /* Màu chữ và độ mờ */
+  transition: color .18s ease; /* Hiệu ứng chuyển màu */
+  cursor: pointer; /* Con trỏ khi hover */
+  user-select: none; /* Không cho chọn chữ */
+}
+.anchor:hover { color: #7bb1ff; } /* Màu khi hover */
+.anchor.active { color: #7bb1ff; } /* Màu khi active */
+
+/* Indicator */
+.indicator {
+  position: absolute; bottom: 0; left: 0; /* Đặt ở dưới cùng bên trái */
+  height: 2px; border-radius: 1px; /* Chiều cao và bo góc */
+  width: calc(var(--ind-width) * 1px); /* Chiều rộng từ biến CSS */
+  transform: translateX(calc(var(--ind-x) * 1px)); /* Vị trí từ biến CSS */
+  transition: transform .36s cubic-bezier(.22,.9,.32,1), width .28s cubic-bezier(.22,.9,.32,1); /* Hiệu ứng chuyển động */
+  background: #7bb1ff; /* Màu chỉ báo */
+  pointer-events: none; /* Không tương tác */
 }
 
-nav ul li:last-child {
-    border-right: none;
+/* Dropdown */
+.dropdown {
+  position: relative; /* Để chứa menu con */
+  display: flex; /* Sử dụng flexbox */
+  align-items: center; /* Căn giữa theo chiều dọc */
 }
 
-nav ul li a {
-    text-decoration: none; /* Bỏ gạch chân */
-    color: var(--text-color); /* Màu chữ */
-    font-weight: bold; /* In đậm */
-    font-size: 1.1rem; /* Kích thước chữ */
-    transition: color 0.3s; /* Hiệu ứng chuyển màu */
+/* Dropdown toggle */
+.dropdown-menu {
+  position: absolute; /* Vị trí tuyệt đối so với dropdown */
+  top: calc(100% + 6px); /* Dưới toggle một chút */
+  left: 0; /* Căn trái */
+  background: rgba(0,0,0,.95); /* Nền mờ đen */
+  min-width: 220px; /* Chiều rộng tối thiểu */
+  border-radius: 6px; /* Bo góc */
+  border: 1px solid rgba(255,255,255,.06); /* Viền nhẹ */
+  box-shadow: 0 8px 24px rgba(0,0,0,.6); /* Đổ bóng */
+  transform-origin: top center; /* Gốc biến đổi */
+  transform: scaleY(0); /* Ẩn theo chiều dọc */
+  opacity: 0; /* Ẩn */
+  pointer-events: none; /* Không tương tác khi ẩn */
+  transition: transform .26s cubic-bezier(.2,.9,.3,1), opacity .22s ease; /* Hiệu ứng chuyển đổi */
+  z-index: 1200; /* Nằm trên các phần tử khác */
+  overflow: hidden; /* Ẩn phần thừa */
 }
 
-nav ul li a:hover {
-    color: var(--primary-color); /* Màu khi hover */
+/* Hiển thị menu khi có class .show */
+.dropdown-menu.show {
+  transform: scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
 }
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.2;
+  transition: background .12s ease, color .12s ease;
+}
+.dropdown-menu a:hover {
+  background: #7bb1ff;
+  color: #000;
+}
+
+/* Nội dung chính */
+.content { padding: 24px; max-width: 900px; margin-left: auto; margin-right: auto; }
 
 /* --- PHẦN 2: CONTENT --- */
 .container {

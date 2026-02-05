@@ -26,31 +26,27 @@
         </div>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="#"><i class="fa-solid fa-house"></i>
-                Trang chủ
-            </a></li>
-            <li><a href="#intro">
-                Giới thiệu
-            </a></li>
-            <li><a href="#loingo">
-                Lời ngỏ
-            </a></li>
-            <li><a href="#gallery">
-                Góc ảnh
-            </a></li>
-            <li><a href="#media"> 
-                Âm nhạc & Clip
-            </a></li>
-            <li><a href="#loikettrian">
-                Lời kết
-            </a></li>
-            <li><a href="#comments">
-                Bình luận
-            </a></li>
-        </ul>
-    </nav>
+    <nav class="navbar">
+    <div class="container">
+      <div class="anchors" id="anchors">
+        <a href="#top" class="anchor active" data-key="home">Báo Tường</a>
+
+        <div class="dropdown" id="gameDropdown">
+          <a href="#" class="anchor" id="gameToggle" aria-expanded="false">Báo Tường ▾</a>
+          <div class="dropdown-menu" id="gameMenu" role="menu" aria-hidden="true">
+            <a href="#intro" role="menuitem">Giới Thiệu</a>
+            <a href="#loingo" role="menuitem">Lời Ngỏ</a>
+            <a href="#xaluan" role="menuitem">Xã Luận</a>
+          </div>
+        </div>
+
+        <a href="#kyyeu" class="anchor" data-key="news">Kỷ Yếu</a>
+        <a href="#comments" class="anchor" data-key="community">Bình Luận</a>
+
+        <div class="indicator" id="indicator"></div>
+      </div>
+    </div>
+  </nav>
 
     <div class="container">
         
@@ -95,21 +91,15 @@
             </div>
         </section>
 
-        <section id="gallery" class="section-box">
+        <section id="kyyeu" class="section-box">
             <h2 class="section-title">
-                Góc Ảnh Kỷ Yếu
+                Góc Kỷ Yếu
             </h2>
             <div class="gallery-grid">
                 <img src="../baotuong/dsc09316.JPG" alt="">
                 <img src="../baotuong/dsc09511.JPG" alt="">
                 <img src="../baotuong/DSC04282.JPG" alt="">
             </div>
-        </section>
-
-        <section id="media" class="section-box">
-            <h2 class="section-title">
-                Góc Âm Nhạc & Video
-            </h2>
             <div class="media-container">
                 <div class="video-wrapper">
                     <p>
@@ -144,10 +134,7 @@ bờ tương lai.
 của thầy cô.
                 </p>
                 <p>
-                    Tờ báo tường này không chỉ là kết tinh của sự sáng tạo và tâm huyết của tập thể lớp
-chúng em, mà còn là lời tri ân sâu sắc, là thông điệp yêu thương gửi đến thầy cô –
-những người đã tận tụy nâng bước, dẫn dắt chúng em trên con đường khám phá tri
-thức và trưởng thành. Nhân dịp 20/11, chúng em xin gửi tới quý thầy cô lời chúc sức khỏe dồi dào, niềm
+                    Nhân dịp 20/11, chúng em xin gửi tới quý thầy cô lời chúc sức khỏe dồi dào, niềm
 vui tràn đầy và mãi giữ vững ngọn lửa đam mê trong sự nghiệp trồng người – hành
 trình cao quý và rực rỡ nhất.
                 </p>
