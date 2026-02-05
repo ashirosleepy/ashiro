@@ -1,9 +1,71 @@
 // Font Loading Detection Script //
 document.addEventListener("DOMContentLoaded", () => {
+    const root = document.documentElement;
+    const body = document.body;
+    let lockedScrollY = window.scrollY || window.pageYOffset || 0;
+    root.classList.add("no-scroll");
+    body.classList.add("no-scroll");
+    body.style.top = `-${lockedScrollY}px`;
+    let scrollLocked = true;
+
+    const lockHandler = (e) => {
+        if (!scrollLocked) return;
+        e.preventDefault();
+    };
+
+    const keyLockHandler = (e) => {
+        if (!scrollLocked) return;
+        const keys = [
+            "ArrowUp",
+            "ArrowDown",
+            "PageUp",
+            "PageDown",
+            "Home",
+            "End",
+            " ",
+            "Spacebar"
+        ];
+        if (keys.includes(e.key)) {
+            e.preventDefault();
+        }
+    };
+
+    window.addEventListener("wheel", lockHandler, { passive: false });
+    window.addEventListener("touchmove", lockHandler, { passive: false });
+    window.addEventListener("keydown", keyLockHandler);
+
+    const unlockScroll = () => {
+        if (!scrollLocked) return;
+        root.classList.remove("no-scroll");
+        body.classList.remove("no-scroll");
+        body.style.top = "";
+        window.scrollTo(0, lockedScrollY);
+        scrollLocked = false;
+        window.removeEventListener("wheel", lockHandler);
+        window.removeEventListener("touchmove", lockHandler);
+        window.removeEventListener("keydown", keyLockHandler);
+    };
+
     const markReady = () => {
-        document.body.classList.add("fonts-loaded");
+        body.classList.add("fonts-loaded");
         requestAnimationFrame(() => {
-            document.body.classList.add("page-ready");
+            body.classList.add("page-ready");
+            const page = document.getElementById("page");
+            let unlocked = false;
+
+            const onAnimEnd = () => {
+                if (unlocked) return;
+                unlocked = true;
+                unlockScroll();
+            };
+
+            if (page) {
+                page.addEventListener("animationend", onAnimEnd, { once: true });
+                // Fallback nếu animation bị tắt hoặc không chạy
+                setTimeout(onAnimEnd, 1200);
+            } else {
+                unlockScroll();
+            }
         });
     };
 
@@ -14,16 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Always start at the top on reload/refresh
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
-}
-window.addEventListener('load', () => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  if (window.location.hash) {
-    history.replaceState(null, '', window.location.pathname + window.location.search);
-  }
-});
+// Keep browser's scroll restoration behavior (default) to avoid jump to top on load
 
 
 // Navigation Indicator Script //
