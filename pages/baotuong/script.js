@@ -166,6 +166,14 @@ document.addEventListener("DOMContentLoaded", () => {
     moveIndicatorTo(activeLink);
   }
 
+  function handleScrollClose() {
+    if (isDropdownOpen()) closeDropdown();
+  }
+  window.addEventListener('scroll', handleScrollClose, { passive: true });
+  window.addEventListener('touchmove', handleScrollClose, { passive: true });
+  window.addEventListener('wheel', handleScrollClose, { passive: true });
+  document.addEventListener('scroll', handleScrollClose, true);
+
   // Dropdown item click
   dropdownItems.forEach(item => {
     item.addEventListener('click', (e) => {
@@ -178,6 +186,14 @@ document.addEventListener("DOMContentLoaded", () => {
       activeLink = gameToggle;
       moveIndicatorTo(gameToggle);
     });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!isDropdownOpen()) return;
+    const target = e.target;
+    if (gameToggle.contains(target) || gameMenu.contains(target)) return;
+    closeDropdown();
   });
 
   // Init indicator
