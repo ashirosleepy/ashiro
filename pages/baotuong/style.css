@@ -204,27 +204,31 @@ a { text-decoration: none; }
 
   .anchors {
     width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     align-items: center;
-    gap: 4px 6px;
-    overflow: visible;
+    gap: 0 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .anchors::-webkit-scrollbar { display: none; }
 
   .anchor {
-    height: auto;
+    height: 44px;
     padding: 0 10px;
     font-size: 13px;
     line-height: 1.2;
     flex: 0 0 auto;
     white-space: nowrap;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    max-width: none;
+    overflow: visible;
+    text-overflow: clip;
   }
 
   #gameToggle {
-    max-width: 120px;
+    max-width: none;
   }
 
   .indicator {
@@ -238,19 +242,12 @@ a { text-decoration: none; }
 
 @media (max-width: 430px) {
   .anchors {
-    gap: 0;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    gap: 0 4px;
   }
-  .anchors::-webkit-scrollbar { display: none; }
 
   .anchor {
-    height: auto;
-    padding: 6px 8px;
+    height: 40px;
+    padding: 0 8px;
     font-size: 12px;
     white-space: nowrap;
     max-width: none;
