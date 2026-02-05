@@ -202,6 +202,7 @@ a { text-decoration: none; }
     padding: 0 20px; /* Padding hai bên */
 }
 
+
 .section-box {
     background: var(--card-bg); /* Nền thẻ bài viết */
     padding: 30px; /* Padding bên trong */
