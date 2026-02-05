@@ -1,12 +1,28 @@
 // Font Loading Detection Script //
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => {
-            document.body.classList.add("fonts-loaded");
-        });
-    } else {
+    const markReady = () => {
         document.body.classList.add("fonts-loaded");
+        requestAnimationFrame(() => {
+            document.body.classList.add("page-ready");
+        });
+    };
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(markReady);
+    } else {
+        markReady();
     }
+});
+
+// Always start at the top on reload/refresh
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.addEventListener('load', () => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
 });
 
 

@@ -27,6 +27,39 @@ body {
     color: var(--text-color, var(--text-main)); /* ưu tiên biến, fallback màu chữ chính */
 }
 
+/* Page reveal on reload: bottom-to-top fade with blur */
+#page {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    filter: blur(8px);
+}
+body.page-ready #page {
+    animation: pageReveal 1s ease both;
+}
+
+@keyframes pageReveal {
+    from {
+        opacity: 0;
+        clip-path: inset(0 0 100% 0);
+        filter: blur(8px);
+    }
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        filter: blur(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #page,
+    body.page-ready #page {
+        opacity: 1;
+        clip-path: none;
+        filter: none;
+        animation: none;
+    }
+}
+
 
 /* --- PHẦN 1: HEADER --- */
 header {
@@ -141,22 +174,22 @@ a { text-decoration: none; }
 
 /* Hiển thị menu khi có class .show */
 .dropdown-menu.show {
-  transform: scaleY(1);
-  opacity: 1;
-  pointer-events: auto;
+  transform: scaleY(1); /* Hiển thị theo chiều dọc */
+  opacity: 1; /* Hiển thị */
+  pointer-events: auto; /* Cho phép tương tác */
 }
 
 .dropdown-menu a {
-  display: block;
-  padding: 10px 14px;
-  color: #fff;
-  font-size: 15px;
-  line-height: 1.2;
-  transition: background .12s ease, color .12s ease;
+  display: block; /* Hiển thị dạng block */
+  padding: 10px 14px; /* Padding */
+  color: #fff; /* Màu chữ trắng */
+  font-size: 15px; /* Kích thước chữ */
+  line-height: 1.2; /* Chiều cao dòng */
+  transition: background .12s ease, color .12s ease; /* Hiệu ứng chuyển màu */
 }
 .dropdown-menu a:hover {
-  background: #7bb1ff;
-  color: #000;
+  background: #7bb1ff; /* Nền khi hover */
+  color: #000; /* Màu chữ khi hover */
 }
 
 /* Nội dung chính */
