@@ -2,6 +2,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.documentElement;
     const body = document.body;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    root.style.setProperty("--sbw", `${Math.max(0, scrollbarWidth)}px`);
     let lockedScrollY = window.scrollY || window.pageYOffset || 0;
     root.classList.add("no-scroll");
     body.classList.add("no-scroll");
