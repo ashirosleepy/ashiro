@@ -11,7 +11,8 @@
 html {
     scroll-behavior: smooth; /* Hiệu ứng cuộn mượt toàn trang */
     scrollbar-gutter: stable;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 html, body {
@@ -32,7 +33,7 @@ body {
 
     /* Màu chữ */
     color: var(--text-color, var(--text-main)); /* ưu tiên biến, fallback màu chữ chính */
-}
+}\r\n\r\n#top {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 1px;\r\n    height: 1px;\r\n}\r\n
 
 body:not(.page-ready) {
     overflow: hidden;
