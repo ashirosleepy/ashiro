@@ -153,11 +153,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  let lastOpenAt = 0;
   function openDropdown() {
     gameMenu.classList.add('show');
     gameMenu.setAttribute('aria-hidden', 'false');
     gameToggle.setAttribute('aria-expanded', 'true');
     moveIndicatorTo(gameToggle);
+    lastOpenAt = Date.now();
   }
   function closeDropdown() {
     gameMenu.classList.remove('show');
@@ -167,7 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleScrollClose() {
-    if (isDropdownOpen()) closeDropdown();
+    if (!isDropdownOpen()) return;
+    if (Date.now() - lastOpenAt < 250) return;
+    closeDropdown();
   }
   window.addEventListener('scroll', handleScrollClose, { passive: true });
   window.addEventListener('touchmove', handleScrollClose, { passive: true });
@@ -190,6 +194,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
+    if (!isDropdownOpen()) return;
+    const target = e.target;
+    if (gameToggle.contains(target) || gameMenu.contains(target)) return;
+    closeDropdown();
+  });
+
+  // Mobile: toggle dropdown on touch and avoid immediate close
+  gameToggle.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isDropdownOpen()) {
+      closeDropdown();
+    } else {
+      openDropdown();
+      headerLinks.forEach(l => l.classList.remove('active'));
+      gameToggle.classList.add('active');
+      activeLink = gameToggle;
+      moveIndicatorTo(gameToggle);
+    }
+  }, { passive: false });
+
+  document.addEventListener('touchstart', (e) => {
     if (!isDropdownOpen()) return;
     const target = e.target;
     if (gameToggle.contains(target) || gameMenu.contains(target)) return;
