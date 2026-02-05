@@ -204,12 +204,12 @@ a { text-decoration: none; }
 
   .anchors {
     width: 100%;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important;
     justify-content: flex-start;
     align-items: center;
     gap: 0 6px;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -219,17 +219,16 @@ a { text-decoration: none; }
     height: 44px;
     padding: 0 10px;
     font-size: 13px;
-    line-height: 1.2;
+    line-height: 1;
     flex: 0 0 auto;
-    white-space: nowrap;
+    white-space: nowrap !important;
     max-width: none;
     overflow: visible;
     text-overflow: clip;
   }
 
-  #gameToggle {
-    max-width: none;
-  }
+  .dropdown { flex: 0 0 auto; }
+  #gameToggle { white-space: nowrap !important; }
 
   .indicator {
     display: none;
@@ -249,7 +248,7 @@ a { text-decoration: none; }
     height: 40px;
     padding: 0 8px;
     font-size: 12px;
-    white-space: nowrap;
+    white-space: nowrap !important;
     max-width: none;
   }
 
