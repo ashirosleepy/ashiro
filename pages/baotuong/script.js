@@ -312,6 +312,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const end = start + PAGE_SIZE;
     const pageItems = allComments.slice(start, end);
     pageItems.forEach(item => renderComment(item.name, item.message, item.time, false));
+    while (list.children.length > PAGE_SIZE) {
+      list.removeChild(list.lastChild);
+    }
 
     ensurePager();
     const prevBtn = document.getElementById("commentPrev");
