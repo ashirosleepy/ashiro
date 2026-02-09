@@ -192,3 +192,109 @@ document.addEventListener("DOMContentLoaded", () => {
     if (activeLink) moveIndicatorTo(activeLink);
   });
 })();
+
+// Google Form Comments
+document.addEventListener("DOMContentLoaded", () => {
+  const FORM_ACTION_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd7Ml-bsv2pRSmQbUG6xqPsLnP3wdGYj2cDPURphPpQlsHmng/formResponse";
+  const ENTRY_NAME = "entry.1241711496";
+  const ENTRY_MESSAGE = "entry.64730262";
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1gYRQb3PUPDFT2K2tO7ktJ-lWE5VaUZc3nxI_OI8cEXE/export?format=csv&gid=918474800";
+
+  const form = document.getElementById("commentForm");
+  const nameInput = document.getElementById("name");
+  const messageInput = document.getElementById("message");
+  const list = document.getElementById("commentList");
+  const submitBtn = form ? form.querySelector("button[type='submit']") : null;
+
+  if (!form || !list) return;
+
+  const renderComment = (name, message, timeText, toTop = true) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "comment-item";
+
+    const title = document.createElement("strong");
+    title.textContent = name || "Ẩn danh";
+
+    const time = document.createElement("span");
+    time.style.marginLeft = "8px";
+    time.style.color = "#666";
+    time.style.fontSize = "0.85rem";
+    time.textContent = timeText || "";
+
+    const header = document.createElement("div");
+    header.appendChild(title);
+    header.appendChild(time);
+
+    const msg = document.createElement("div");
+    msg.textContent = message || "";
+    msg.style.marginTop = "6px";
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(msg);
+
+    if (toTop && list.firstChild) {
+      list.insertBefore(wrapper, list.firstChild);
+    } else {
+      list.appendChild(wrapper);
+    }
+  };
+
+  const loadFromSheet = async () => {
+    if (!SHEET_CSV_URL) return;
+    try {
+      const res = await fetch(SHEET_CSV_URL, { cache: "no-store" });
+      const csv = await res.text();
+      const lines = csv.split(/\r?\n/).filter(Boolean);
+      if (lines.length <= 1) return;
+      list.innerHTML = "";
+      // Skip header row
+      for (let i = lines.length - 1; i >= 1; i--) {
+        const row = lines[i];
+        const cols = row.split(",").map(c => c.replace(/^\"|\"$/g, "").replace(/\"\"/g, "\""));
+        // Typical Google Forms order: Timestamp, Name, Comment
+        const timeText = cols[0] || "";
+        const name = cols[1] || "Ẩn danh";
+        const message = cols[2] || "";
+        if (message) renderComment(name, message, timeText, false);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = (nameInput.value || "").trim() || "Ẩn danh";
+    const message = (messageInput.value || "").trim();
+    if (!message) return;
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = "0.7";
+    }
+
+    const formData = new FormData();
+    formData.append(ENTRY_NAME, name);
+    formData.append(ENTRY_MESSAGE, message);
+
+    try {
+      await fetch(FORM_ACTION_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      });
+      renderComment(name, message, new Date().toLocaleString("vi-VN"), true);
+      messageInput.value = "";
+    } catch (err) {
+      console.error(err);
+      alert("Không thể gửi bình luận. Vui lòng thử lại.");
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = "1";
+    }
+  });
+
+  loadFromSheet();
+});

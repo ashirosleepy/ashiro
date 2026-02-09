@@ -371,8 +371,9 @@ a { text-decoration: none; }
 }
 
 .submit-btn {
-    background-color: var(--accent-color); /* Nền nút gửi */
-    color: white; /* Màu chữ nút */
+    background-color: var(--primary-color); /* Nền nút gửi */
+    color: #fff; /* Màu chữ nút */
+    border: 1px solid rgba(0,0,0,0.1);
     padding: 10px 25px; /* Padding nút */
     border: none; /* Bỏ viền */
     border-radius: 4px; /* Bo góc nút */
