@@ -192,25 +192,30 @@ a { text-decoration: none; }
 
 @media (max-width: 768px) {
   .navbar {
-    height: auto;
+    height: 58px;
   }
 
   .navbar .container {
-    justify-content: center;
+    justify-content: flex-start;
     padding: 0 8px;
   }
 
   .anchors {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px 6px;
-    overflow: visible;
+    flex-wrap: nowrap;
+    gap: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .anchors::-webkit-scrollbar {
+    height: 0;
   }
 
   .anchor {
-    height: 44px;
-    padding: 0 10px;
-    font-size: 13px;
+    height: 58px;
+    padding: 0 12px;
+    font-size: 15px;
     flex: 0 0 auto;
     white-space: nowrap;
   }

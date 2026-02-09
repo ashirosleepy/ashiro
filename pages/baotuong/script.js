@@ -239,22 +239,55 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const parseCsvLine = (line) => {
+    const out = [];
+    let cur = "";
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === "\"") {
+        const next = line[i + 1];
+        if (inQuotes && next === "\"") {
+          cur += "\"";
+          i++;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (ch === "," && !inQuotes) {
+        out.push(cur);
+        cur = "";
+      } else {
+        cur += ch;
+      }
+    }
+    out.push(cur);
+    return out.map(c => c.replace(/\r/g, "").trim());
+  };
+
+  const findColIndex = (headers, patterns, fallback) => {
+    const idx = headers.findIndex(h => patterns.some(p => p.test(h)));
+    return idx >= 0 ? idx : fallback;
+  };
+
   const loadFromSheet = async () => {
     if (!SHEET_CSV_URL) return;
     try {
       const res = await fetch(SHEET_CSV_URL, { cache: "no-store" });
       const csv = await res.text();
-      const lines = csv.split(/\r?\n/).filter(Boolean);
+      const lines = csv.split(/\r?\n/).filter(l => l.trim() !== "");
       if (lines.length <= 1) return;
       list.innerHTML = "";
+      const headerCols = parseCsvLine(lines[0]).map(h => h.replace(/^\"|\"$/g, "").trim());
+      const nameIdx = findColIndex(headerCols, [/họ/i, /tên/i, /name/i], 1);
+      const msgIdx = findColIndex(headerCols, [/bình/i, /luận/i, /comment/i, /message/i], 2);
+      const timeIdx = findColIndex(headerCols, [/time/i, /timestamp/i, /ngày/i, /giờ/i, /date/i], 0);
+
       // Skip header row
       for (let i = lines.length - 1; i >= 1; i--) {
-        const row = lines[i];
-        const cols = row.split(",").map(c => c.replace(/^\"|\"$/g, "").replace(/\"\"/g, "\""));
-        // Typical Google Forms order: Timestamp, Name, Comment
-        const timeText = cols[0] || "";
-        const name = cols[1] || "Ẩn danh";
-        const message = cols[2] || "";
+        const cols = parseCsvLine(lines[i]).map(c => c.replace(/^\"|\"$/g, "").replace(/\"\"/g, "\""));
+        const timeText = cols[timeIdx] || "";
+        const name = cols[nameIdx] || "Ẩn danh";
+        const message = cols[msgIdx] || "";
         if (message) renderComment(name, message, timeText, false);
       }
     } catch (err) {
