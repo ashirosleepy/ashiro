@@ -84,15 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // Navigation Indicator Script //
 (function () {
   const anchors = document.getElementById('anchors');
-  if (!anchors) return;
   const indicator = document.getElementById('indicator');
-  const headerLinks = Array.from(anchors.querySelectorAll('.anchor'))
-    .filter(a => !a.closest('.dropdown-menu'));
+  const headerLinks = Array.from(anchors.querySelectorAll(':scope > .anchor, :scope > .dropdown > .anchor'));
   const gameToggle = document.getElementById('gameToggle');
   const gameMenu = document.getElementById('gameMenu');
   const dropdownItems = Array.from(gameMenu.querySelectorAll('a'));
   let activeLink = anchors.querySelector('.anchor.active') || headerLinks[0];
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
   function scrollToHash(hash) {
     if (!hash || hash === '#') return false;
@@ -131,8 +128,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     link.addEventListener('click', (e) => {
-      if (link === gameToggle) return;
-      if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+      if (link === gameToggle) {
+        e.preventDefault();
+        if (isDropdownOpen()) {
+          closeDropdown();
+        } else {
+          openDropdown();
+        }
+        headerLinks.forEach(l => l.classList.remove('active'));
+        gameToggle.classList.add('active');
+        activeLink = gameToggle;
+        moveIndicatorTo(gameToggle);
+        return;
+      }
+      if (link.dataset && link.dataset.key === 'home') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
         const ok = scrollToHash(link.getAttribute('href'));
         if (ok) e.preventDefault();
       }
@@ -144,13 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  let lastOpenAt = 0;
   function openDropdown() {
     gameMenu.classList.add('show');
     gameMenu.setAttribute('aria-hidden', 'false');
     gameToggle.setAttribute('aria-expanded', 'true');
     moveIndicatorTo(gameToggle);
-    lastOpenAt = Date.now();
   }
   function closeDropdown() {
     gameMenu.classList.remove('show');
@@ -158,35 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
     gameToggle.setAttribute('aria-expanded', 'false');
     moveIndicatorTo(activeLink);
   }
-
-  function toggleDropdown(e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    if (isDropdownOpen()) {
-      closeDropdown();
-    } else {
-      openDropdown();
-      headerLinks.forEach(l => l.classList.remove('active'));
-      gameToggle.classList.add('active');
-      activeLink = gameToggle;
-      moveIndicatorTo(gameToggle);
-    }
-  }
-
-  function handleScrollClose(e) {
-    if (!isDropdownOpen()) return;
-    if (isMobile) return;
-    if (Date.now() - lastOpenAt < 300) return;
-    if (e && e.target) {
-      if (gameToggle.contains(e.target) || gameMenu.contains(e.target) || anchors.contains(e.target)) return;
-    }
-    closeDropdown();
-  }
-  window.addEventListener('scroll', handleScrollClose, { passive: true });
-  window.addEventListener('wheel', handleScrollClose, { passive: true });
-  document.addEventListener('scroll', handleScrollClose, true);
 
   // Dropdown item click
   dropdownItems.forEach(item => {
@@ -201,23 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
       moveIndicatorTo(gameToggle);
     });
   });
-
-  // Close dropdown when clicking outside (desktop only)
-  document.addEventListener('click', (e) => {
-    if (!isDropdownOpen()) return;
-    if (isMobile) return;
-    const target = e.target;
-    if (gameToggle.contains(target) || gameMenu.contains(target)) return;
-    closeDropdown();
-  });
-
-  // Toggle dropdown (desktop)
-  if (!isMobile) {
-    gameToggle.addEventListener('click', toggleDropdown);
-  } else {
-    // Always open on mobile to avoid tap issues
-    openDropdown();
-  }
 
   // Init indicator
   if (activeLink) {
