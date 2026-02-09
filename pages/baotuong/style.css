@@ -353,6 +353,16 @@ a { text-decoration: none; }
     padding-top: 20px; /* Padding trên */
 } 
 
+/* Comment pagination animation */
+.comment-list.is-animating {
+    opacity: 0;
+    transform: translateY(8px);
+}
+.comment-list.is-animating,
+.comment-list {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
 .comment-item {
     background: #f1f1f1; /* Nền bình luận */
     padding: 10px; /* Padding bên trong */

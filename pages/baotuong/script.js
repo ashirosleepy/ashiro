@@ -306,15 +306,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderPage = (page) => {
     const totalPages = Math.max(1, Math.ceil(allComments.length / PAGE_SIZE));
     currentPage = Math.min(Math.max(1, page), totalPages);
-    list.innerHTML = "";
+    list.classList.add("is-animating");
+    setTimeout(() => {
+      list.innerHTML = "";
 
-    const start = (currentPage - 1) * PAGE_SIZE;
-    const end = start + PAGE_SIZE;
-    const pageItems = allComments.slice(start, end);
-    pageItems.forEach(item => renderComment(item.name, item.message, item.time, false));
-    while (list.children.length > PAGE_SIZE) {
-      list.removeChild(list.lastChild);
-    }
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const end = start + PAGE_SIZE;
+      const pageItems = allComments.slice(start, end);
+      pageItems.forEach(item => renderComment(item.name, item.message, item.time, false));
+      while (list.children.length > PAGE_SIZE) {
+        list.removeChild(list.lastChild);
+      }
+      requestAnimationFrame(() => list.classList.remove("is-animating"));
+    }, 60);
 
     ensurePager();
     const prevBtn = document.getElementById("commentPrev");
