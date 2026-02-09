@@ -190,45 +190,6 @@ a { text-decoration: none; }
   pointer-events: none; /* Không tương tác */
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    height: 58px;
-  }
-
-  .navbar .container {
-    justify-content: flex-start;
-    padding: 0 8px;
-  }
-
-  .anchors {
-    flex-wrap: nowrap;
-    gap: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .anchors::-webkit-scrollbar {
-    height: 0;
-  }
-
-  .anchor {
-    height: 58px;
-    padding: 0 12px;
-    font-size: 15px;
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
-
-  .indicator {
-    display: none;
-  }
-
-  .dropdown-menu {
-    min-width: 180px;
-  }
-}
-
 /* Dropdown */
 .dropdown {
   position: relative; /* Để chứa menu con */

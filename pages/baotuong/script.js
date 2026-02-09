@@ -141,10 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         moveIndicatorTo(gameToggle);
         return;
       }
-      if (link.dataset && link.dataset.key === 'home') {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+      if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
         const ok = scrollToHash(link.getAttribute('href'));
         if (ok) e.preventDefault();
       }
