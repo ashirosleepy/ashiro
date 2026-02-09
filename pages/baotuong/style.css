@@ -15,7 +15,7 @@ html {
 }
 
 html, body {
-    height: 100%;
+    height: 100%; /* Đảm bảo chiều cao đầy đủ */
 }
 
 

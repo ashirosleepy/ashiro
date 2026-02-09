@@ -266,6 +266,98 @@ document.addEventListener("DOMContentLoaded", () => {
     return idx >= 0 ? idx : fallback;
   };
 
+  const PAGE_SIZE = 5;
+  let allComments = [];
+  let currentPage = 1;
+
+  const ensurePager = () => {
+    let pager = document.getElementById("commentPager");
+    if (pager) return pager;
+    pager = document.createElement("div");
+    pager.id = "commentPager";
+    pager.style.display = "flex";
+    pager.style.gap = "8px";
+    pager.style.marginTop = "12px";
+    pager.style.alignItems = "center";
+
+    const prevBtn = document.createElement("button");
+    prevBtn.type = "button";
+    prevBtn.id = "commentPrev";
+    prevBtn.textContent = "Trang trước";
+
+    const pageNumbers = document.createElement("div");
+    pageNumbers.id = "commentPageNumbers";
+    pageNumbers.style.display = "flex";
+    pageNumbers.style.gap = "6px";
+
+    const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.id = "commentNext";
+    nextBtn.textContent = "Trang sau";
+
+    pager.appendChild(prevBtn);
+    pager.appendChild(pageNumbers);
+    pager.appendChild(nextBtn);
+
+    list.parentNode.appendChild(pager);
+    return pager;
+  };
+
+  const renderPage = (page) => {
+    const totalPages = Math.max(1, Math.ceil(allComments.length / PAGE_SIZE));
+    currentPage = Math.min(Math.max(1, page), totalPages);
+    list.innerHTML = "";
+
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const end = start + PAGE_SIZE;
+    const pageItems = allComments.slice(start, end);
+    pageItems.forEach(item => renderComment(item.name, item.message, item.time, false));
+
+    ensurePager();
+    const prevBtn = document.getElementById("commentPrev");
+    const nextBtn = document.getElementById("commentNext");
+    const pageNumbers = document.getElementById("commentPageNumbers");
+    if (pageNumbers) {
+      pageNumbers.innerHTML = "";
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = String(i);
+        btn.dataset.page = String(i);
+        if (i === currentPage) {
+          btn.disabled = true;
+          btn.style.opacity = "0.6";
+        }
+        pageNumbers.appendChild(btn);
+      }
+    }
+    if (prevBtn) prevBtn.disabled = currentPage <= 1;
+    if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
+  };
+
+  const bindPager = () => {
+    const prevBtn = document.getElementById("commentPrev");
+    const nextBtn = document.getElementById("commentNext");
+    const pageNumbers = document.getElementById("commentPageNumbers");
+    if (prevBtn && !prevBtn.dataset.bound) {
+      prevBtn.dataset.bound = "1";
+      prevBtn.addEventListener("click", () => renderPage(currentPage - 1));
+    }
+    if (nextBtn && !nextBtn.dataset.bound) {
+      nextBtn.dataset.bound = "1";
+      nextBtn.addEventListener("click", () => renderPage(currentPage + 1));
+    }
+    if (pageNumbers && !pageNumbers.dataset.bound) {
+      pageNumbers.dataset.bound = "1";
+      pageNumbers.addEventListener("click", (e) => {
+        const btn = e.target.closest("button");
+        if (!btn || !btn.dataset.page) return;
+        const page = parseInt(btn.dataset.page, 10);
+        if (!Number.isNaN(page)) renderPage(page);
+      });
+    }
+  };
+
   const loadFromSheet = async () => {
     if (!SHEET_CSV_URL) return;
     try {
@@ -273,20 +365,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const csv = await res.text();
       const lines = csv.split(/\r?\n/).filter(l => l.trim() !== "");
       if (lines.length <= 1) return;
-      list.innerHTML = "";
       const headerCols = parseCsvLine(lines[0]).map(h => h.replace(/^\"|\"$/g, "").trim());
       const nameIdx = findColIndex(headerCols, [/họ/i, /tên/i, /name/i], 1);
       const msgIdx = findColIndex(headerCols, [/bình/i, /luận/i, /comment/i, /message/i], 2);
       const timeIdx = findColIndex(headerCols, [/time/i, /timestamp/i, /ngày/i, /giờ/i, /date/i], 0);
 
+      allComments = [];
       // Skip header row
       for (let i = lines.length - 1; i >= 1; i--) {
         const cols = parseCsvLine(lines[i]).map(c => c.replace(/^\"|\"$/g, "").replace(/\"\"/g, "\""));
         const timeText = cols[timeIdx] || "";
         const name = cols[nameIdx] || "Ẩn danh";
         const message = cols[msgIdx] || "";
-        if (message) renderComment(name, message, timeText, false);
+        if (message) allComments.push({ name, message, time: timeText });
       }
+
+      renderPage(1);
+      bindPager();
     } catch (err) {
       console.error(err);
     }
@@ -313,7 +408,9 @@ document.addEventListener("DOMContentLoaded", () => {
         mode: "no-cors",
         body: formData
       });
-      renderComment(name, message, new Date().toLocaleString("vi-VN"), true);
+      allComments.unshift({ name, message, time: new Date().toLocaleString("vi-VN") });
+      renderPage(1);
+      bindPager();
       messageInput.value = "";
     } catch (err) {
       console.error(err);
